@@ -9,26 +9,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import com.Web_Project.Entity.User;
-//import com.Web_Project.Repository.UserRepository;
+import com.Web_Project.Entity.User;
+import com.Web_Project.Repository.UserRepository;
+
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
 
 	
-	//@Autowired
-//	private UserRepository  userRepo;
+	@Autowired
+	 UserRepository  userRepo;
 	
 	
 	
 	//registration or inserting data
-//	@PostMapping("/Registration")
-	//public String registration(@RequestBody User user   ) 
+	@PostMapping("/Registration")
+	public String registration(@RequestBody User user   ) 
 	{
 		// the save method provided by Jpa to insert data
-	  // userRepo.save(user);
-	//	return  "user save successfully..";
+	   userRepo.save(user);
+	return  "user save successfully..";
 	}
 	
 	
