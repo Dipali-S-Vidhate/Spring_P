@@ -76,12 +76,6 @@ public String welcome()
 	return "welcome Spring boot by api";
 }
 
-//no
-@RequestMapping("/getmassege")
-public String massage()
-{
-	return "oh! no..";
-}
 
 
 //answered
