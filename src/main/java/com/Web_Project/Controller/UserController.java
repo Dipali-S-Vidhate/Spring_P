@@ -1,12 +1,15 @@
 package com.Web_Project.Controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +49,23 @@ public class UserController {
 					.orElse(ResponseEntity.notFound().build());
 		}
 		
+		
+		
+		@DeleteMapping("/deleteById/{sid}")
+		public  String  deleteById(@PathVariable int sid) 
+		{
+			Optional<User> userId =userRepo.findById(sid);
+			
+			if(userId.isPresent())
+			{
+			userRepo.deleteById(sid);
+			return"user deleted successfully";
+			}
+			else
+			{
+			return "user Record not found";
+			}
+		}
 		
 	
 	
