@@ -1,5 +1,6 @@
 package com.Web_Project.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Web_Project.Dao.UserDao;
 import com.Web_Project.Entity.User;
 import com.Web_Project.Repository.UserRepository;
 
@@ -25,6 +27,9 @@ public class UserController {
 	
 	@Autowired
 	 UserRepository  userRepo;
+	
+	@Autowired
+	UserDao userDao ;
 	
 	
 	
@@ -68,6 +73,13 @@ public class UserController {
 		}
 		
 	
+		@RequestMapping("/getAlluser")
+		public List<User> getAlluser()
+		{
+			return  userDao.getAllUserDao();
+			
+			
+		}
 	
 	
 @GetMapping("/")
