@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.Web_Project.Dao.UserDao;
 import com.Web_Project.Entity.User;
@@ -72,12 +73,37 @@ public class UserController {
 			}
 		}
 		
+		
+		@PutMapping("/updateStudent/{sid}")         //Reads the JSON body of the HTTP request and converts it into a User object named userNew.
+		public String updateUser(@PathVariable int sid,@RequestBody User userNew)  //@PathVariable int sid:
+		//Extracts the value of {sid} from the URL and stores it in the variable sid.
+		
+		
+		{
+			Optional<User> result =userRepo.findById(sid);
+			
+			//Optional is used to avoid NullPointerException.
+			
+			if(result.isPresent()) 
+			{
+				User users =userRepo.findById(sid).get();
+				users.setName(userNew.getName());
+				users.setEmail(userNew.getEmail());
+				
+				userRepo.save(users);
+				return " User updated successfully ";
+			}
+			else
+			{
+				return "No user found for update";
+			}
+		}
+		
 	
 		@RequestMapping("/getAlluser")
 		public List<User> getAlluser()
 		{
 			return  userDao.getAllUserDao();
-			
 			
 		}
 	
